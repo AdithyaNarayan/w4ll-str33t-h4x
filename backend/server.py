@@ -8,9 +8,14 @@ reddit = praw.Reddit(client_id='tLNJPqcv90IWWQ', client_secret='f8viKi1NaK7CAjLX
 
 stock = {}
 
-@app.route('/stocks', methods=['GET'])
-def get_stocks():
-    return jsonify(sorted(stock.items(), key=lambda keyvaluepair: -keyvaluepair[1]))
+@app.route('/stocks/<num>', methods=['GET'])
+def get_stocks(num):
+    try:
+        no_of_stocks = int(num)
+        stocks = sorted(stock.items(), key=lambda keyvaluepair: -keyvaluepair[1])
+        return jsonify(stocks[:no_of_stocks])
+    except:
+        return "error"
 
 @app.route('/stocks', methods=['POST'])
 def update_stock():
