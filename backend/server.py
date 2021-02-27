@@ -14,10 +14,20 @@ def get_stocks():
 @app.route('/stocks', methods=['POST'])
 def update_stock():
     posts = reddit.subreddit('wallstreetbets').hot(limit=1000)
-    search_str = []
+    search_str = ""
     for post in posts:
-        search_str.append(post.title)
-    return str(search_str)
+        search_str += post.title
+    
+    f = open("stocks/stocks.txt", "r")
+    for line in f.readlines():
+        code = line.split('-')[0].strip()
+        if len(code) < 3:
+            continue
+        num = search_str.count(code)
+        if num > 0:
+            stock[code] = num
+    
+    return "updated"
 
 @app.route('/stock/<stock_id>', methods=['GET'])
 def get_stock(stock_id):
