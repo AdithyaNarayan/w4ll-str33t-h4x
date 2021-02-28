@@ -5,7 +5,7 @@ from praw.models import MoreComments
 from os.path import join, dirname, realpath
 
 app = Flask(__name__)
-reddit = praw.Reddit(client_id='tLNJPqcv90IWWQ', client_secret='f8viKi1NaK7CAjLX8wv24CAl-DggnQ', user_agent='w4ll-str33t-h4x')
+reddit = praw.Reddit(client_id='', client_secret='', user_agent='w4ll-str33t-h4x')
 
 stock = {}
 
